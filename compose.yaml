@@ -1,0 +1,16 @@
+# Local PostgreSQL for running the app:  docker compose up -d
+# Port 5433 so it doesn't clash with roundnet-analyzer's database on 5432.
+# Flyway creates the schema when the app starts, so this starts empty.
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: roundnet
+      POSTGRES_PASSWORD: roundnet
+      POSTGRES_DB: roundnet_insights
+    ports:
+      - "5433:5432"
+    volumes:
+      - roundnet-insights-data:/var/lib/postgresql/data
+volumes:
+  roundnet-insights-data:
