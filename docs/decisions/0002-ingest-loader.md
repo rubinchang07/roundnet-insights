@@ -15,7 +15,7 @@ The loader takes the exported JSON file from Roundnet Analyzer, rejects any miss
 Ultimately, I want to be able to talk about my Java project in Java terms, and make it consistent with my ADR 0001 plan. I don't mind writing it again in Java, especially since reading as Java objects enables errors to be outputted as structured lists.
 
 ## Consequences
-1) Validation exists in both the DB and Java code. Java checks the JSON files with the rules first, returning any errors that the loader should account for. The DB is an extra wave of defense in case the Java code has a bug. 
+1) Validation exists in both the DB and Java code. Java checks the JSON files with the rules first, then rejects the file with a list of problems. The DB is an extra wave of defense in case the Java code has a bug. 
 2) Cost of rewriting + Java version issues. The old loader should only exist in tests as the oracle, not in Flyway, as it only has one responsibility and should not exist in two places (that might confuse people).
 3) Possible drifting between Roundnet Analyzer and this project as Roundnet Analyzer may get updated in the future with more file formats. 
 
